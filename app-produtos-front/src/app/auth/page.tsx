@@ -96,7 +96,7 @@ export default function AuthPage() {
           Entre na sua conta
         </h1>
         <p className="mt-3 text-sm leading-6 text-zinc-600 dark:text-zinc-300">
-          Use o apelido e a senha para acessar o painel da atividade.
+          Digite o seu apelido e a senha para acessar a página.
         </p>
 
         <form className="mt-8 space-y-5" onSubmit={handleSubmit}>

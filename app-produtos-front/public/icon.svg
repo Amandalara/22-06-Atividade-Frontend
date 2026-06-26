@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Atividade Frontend icon">
+  <rect width="64" height="64" rx="14" fill="#18181b"/>
+  <path d="M20 18h24c6 0 10 4 10 10v8c0 6-4 10-10 10H20v-8h24v-2H20v-8h24v-2H20z" fill="#f5f5f5"/>
+  <circle cx="44" cy="44" r="6" fill="#a1a1aa"/>
+</svg>
