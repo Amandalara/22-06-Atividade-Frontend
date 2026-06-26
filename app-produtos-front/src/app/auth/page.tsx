@@ -12,8 +12,8 @@ type FormErrors = {
 
 export default function AuthPage() {
   const router = useRouter();
-  const [nickname, setNickname] = useState('kminchelle');
-  const [password, setPassword] = useState('0lelplR');
+  const [nickname, setNickname] = useState('emilys');
+  const [password, setPassword] = useState('emilyspass');
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -60,20 +60,24 @@ export default function AuthPage() {
       });
 
       if (!response.ok) {
-        throw new Error('Não foi possível autenticar com as credenciais informadas.');
+        const errorMessage = await response.text();
+        throw new Error(
+          errorMessage.includes('Invalid credentials')
+            ? 'Credenciais inválidas. Use o usuário e senha válidos da API DummyJSON.'
+            : 'Não foi possível autenticar com as credenciais informadas.',
+        );
       }
 
       const data = await response.json();
+      const userData = {
+        username: data.username ?? nickname.trim(),
+        token: data.token ?? null,
+      };
 
-      localStorage.setItem(
-        'auth-user',
-        JSON.stringify({
-          username: data.username ?? nickname.trim(),
-          token: data.token ?? null,
-        }),
-      );
+      window.localStorage.setItem('auth-user', JSON.stringify(userData));
+      document.cookie = `auth-user=${encodeURIComponent(JSON.stringify(userData))}; path=/; max-age=86400; SameSite=Lax`;
 
-      router.push('/dashboard');
+      router.replace('/dashboard');
     } catch (error) {
       setErrors({
         general:
